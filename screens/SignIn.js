@@ -1,5 +1,5 @@
 import { Keyboard, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, Stack, Text, Input, Pressable, Button, Center } from 'native-base'
 import { COLORS, FONTS } from '../constants/constants'
 import GoogleIcon from '../assets/icons/GoogleIcon'
@@ -11,9 +11,12 @@ import ShowIcon from '../assets/icons/ShowIcon'
 import RightLine from '../assets/icons/RightLine'
 import LeftLine from '../assets/icons/LeftLine'
 import LockIcon from '../assets/icons/LockIcon'
+import { LangContext } from '../App'
 
 
 const SignIn = ({ navigation }) => {
+
+    let translations = useContext(LangContext)
 
     const [showPass, setShowPass] = React.useState(false)
 
@@ -25,12 +28,12 @@ const SignIn = ({ navigation }) => {
                 <Box style={{
                     marginTop: 100,
                 }}>
-                    <Text style={styles.entryText}>Ласкаво просимо</Text>
+                    <Text style={styles.entryText}>{translations.signInScreen.headText}</Text>
                 </Box>
                 <Box style={{
                     marginTop: 20,
                 }}>
-                    <Text style={styles.entryTextBottom}>Будь ласка, введіть свої дані для входу нижче!</Text>
+                    <Text style={styles.entryTextBottom}>{translations.signInScreen.secondaryText}</Text>
                 </Box>
                 <Stack direction="column" mb="2.5" mt="5" space={5}>
                     <Input
@@ -38,7 +41,7 @@ const SignIn = ({ navigation }) => {
                         size="lg"
                         variant="rounded"
                         InputLeftElement={<MessageIcon style={{ marginLeft: 10 }} />}
-                        placeholder='Email'
+                        placeholder={translations.signInScreen.email}
                         type='text'
                         _focus={styles.focusInput}
                         focusOutlineColor={COLORS.red}
@@ -52,7 +55,7 @@ const SignIn = ({ navigation }) => {
                         variant="rounded"
                         InputLeftElement={<LockIcon style={{ marginLeft: 10 }} />}
                         InputRightElement={<TouchableOpacity style={{ marginRight: 10 }} onPress={() => setShowPass(!showPass)}><ShowIcon /></TouchableOpacity>}
-                        placeholder='Пароль'
+                        placeholder={translations.signInScreen.password}
                         type={showPass ? "text" : "password"}
                         _focus={styles.focusInput}
                         focusOutlineColor={COLORS.red}
@@ -61,17 +64,17 @@ const SignIn = ({ navigation }) => {
                         placeholderTextColor={COLORS.black}
                     />
                     <TouchableOpacity style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-                            <Text style={styles.textLink}>Забули пароль?</Text>
+                            <Text style={styles.textLink}>{translations.signInScreen.forgotPassword}</Text>
                     </TouchableOpacity>
                     <Button size="lg" _text={styles.buttonText} variant="unstyled" style={styles.button} onPress={() => navigation.navigate("Home")}>
-                        Продовжити
+                        {translations.signInScreen.continueButton}
                     </Button>
                 </Stack>
                 <Box justifyContent="center" flexDirection="row" marginTop={15}>
                     <Text>
                         <Center flexDirection="row" _text={{ color: COLORS.lightGray }} >
                             <LeftLine style={{ marginRight: 2 }} />
-                            Або продовжити через
+                            {translations.signInScreen.socialMedia}
                             <RightLine style={{ marginLeft: 2 }} /></Center>
                     </Text>
 
@@ -133,8 +136,8 @@ const SignIn = ({ navigation }) => {
                     </Pressable>
                 </Stack>
                 <Box justifyContent="center" alignItems="center" style={styles.footerTextWrapper}>
-                    <Text style={styles.footerText}>Немає облікового запису в нас?</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate("SignUp")}><Text style={styles.footerTextLink}>Зареєструватися</Text></TouchableOpacity>
+                    <Text style={styles.footerText}>{translations.signInScreen.dontHaveAccount}</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("SignUp")}><Text style={styles.footerTextLink}>{translations.signInScreen.signUpButton}</Text></TouchableOpacity>
                 </Box>
             </Box>
         </TouchableWithoutFeedback>

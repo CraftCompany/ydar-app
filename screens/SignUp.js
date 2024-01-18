@@ -1,5 +1,5 @@
 import { Keyboard, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, Stack, Text, Input, Pressable, Image, Icon, Checkbox, Button, Center } from 'native-base'
 import { COLORS, FONTS } from '../constants/constants'
 import GoogleIcon from '../assets/icons/GoogleIcon'
@@ -13,6 +13,7 @@ import RightLine from '../assets/icons/RightLine'
 import LeftLine from '../assets/icons/LeftLine'
 import LockIcon from '../assets/icons/LockIcon'
 import { SuccessSplash } from '../splashes/successSplash'
+import { LangContext } from '../App'
 
 
 const SignIn = ({ navigation }) => {
@@ -30,6 +31,8 @@ const SignIn = ({ navigation }) => {
         setShowModal(true)
     }
 
+    let translations = useContext(LangContext)
+
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -39,12 +42,12 @@ const SignIn = ({ navigation }) => {
                 <Box style={{
                     marginTop: 100,
                 }}>
-                    <Text style={styles.entryText}>Ласкаво просимо</Text>
+                    <Text style={styles.entryText}>{translations.signUpScreen.headText}</Text>
                 </Box>
                 <Box style={{
                     marginTop: 20,
                 }}>
-                    <Text style={styles.entryTextBottom}>Будь ласка, введіть дані свого облікового запису нижче!</Text>
+                    <Text style={styles.entryTextBottom}>{translations.signUpScreen.secondaryText}</Text>
                 </Box>
                 <Stack direction="column" mb="2.5" mt="5" space={5}>
                     <Input
@@ -52,7 +55,7 @@ const SignIn = ({ navigation }) => {
                         size="lg"
                         variant="rounded"
                         InputLeftElement={<ProfileIcon style={{ marginLeft: 10 }} />}
-                        placeholder="Ім'я"
+                        placeholder={translations.signUpScreen.name}
                         type='text'
                         _focus={styles.focusInput}
                         focusOutlineColor={COLORS.red}
@@ -67,7 +70,7 @@ const SignIn = ({ navigation }) => {
                         size="lg"
                         variant="rounded"
                         InputLeftElement={<MessageIcon style={{ marginLeft: 10 }} />}
-                        placeholder='Email'
+                        placeholder={translations.signUpScreen.email}
                         type='text'
                         _focus={styles.focusInput}
                         focusOutlineColor={COLORS.red}
@@ -83,7 +86,7 @@ const SignIn = ({ navigation }) => {
                         variant="rounded"
                         InputLeftElement={<LockIcon style={{ marginLeft: 10 }} />}
                         InputRightElement={<TouchableOpacity style={{ marginRight: 10 }} onPress={() => setShowPass(!showPass)}><ShowIcon /></TouchableOpacity>}
-                        placeholder='Пароль'
+                        placeholder={translations.signUpScreen.password}
                         type={showPass ? "text" : "password"}
                         _focus={styles.focusInput}
                         focusOutlineColor={COLORS.red}
@@ -93,16 +96,16 @@ const SignIn = ({ navigation }) => {
                         onChange={(e) => setPassword(e.nativeEvent.text)}
                         value={password}
                     />
-                    <Checkbox size="sm" colorScheme="red" borderColor={COLORS.red} value={accepted} onChange={setAccepted} style={{ marginLeft: 10 }}><Text style={styles.checkboxText}> Прийміть положення та умови </Text></Checkbox>
+                    <Checkbox size="sm" colorScheme="red" borderColor={COLORS.red} value={accepted} onChange={setAccepted} style={{ marginLeft: 10 }}><Text style={styles.checkboxText}> {translations.signUpScreen.legal} </Text></Checkbox>
                     <Button size="lg" _text={styles.buttonText} variant="unstyled" style={styles.button} isDisabled={!accepted} onPress={handleModalOpen}>
-                        Продовжити
+                        {translations.signUpScreen.continueButton}
                     </Button>
                 </Stack>
                 <Box justifyContent="center" flexDirection="row" marginTop={15}>
                     <Text>
                         <Center flexDirection="row" _text={{ color: COLORS.lightGray }} >
                             <LeftLine style={{ marginRight: 2 }} />
-                            Або продовжити через
+                            {translations.signUpScreen.socialMedia}
                             <RightLine style={{ marginLeft: 2 }} /></Center>
                     </Text>
 
@@ -164,8 +167,8 @@ const SignIn = ({ navigation }) => {
                     </Pressable>
                 </Stack>
                 <Box justifyContent="center" alignItems="center" style={styles.footerTextWrapper}>
-                    <Text style={styles.footerText}>Вже маєте обліковий запис у нас?</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate("SignIn")}><Text style={styles.footerTextLink}>Увійти</Text></TouchableOpacity>
+                    <Text style={styles.footerText}>{translations.signUpScreen.alreadyHaveAccount}</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("SignIn")}><Text style={styles.footerTextLink}>{translations.signUpScreen.signInButton}</Text></TouchableOpacity>
                 </Box>
                 <SuccessSplash modalVisible={showModal} setModalVisible={setShowModal} />
             </Box>

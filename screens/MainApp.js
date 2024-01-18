@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feed, Tasks, Ticket, Profile, Settings } from './MainAppScreens';
-import { COLORS } from '../constants/constants';
+import { COLORS, FONTS } from '../constants/constants';
 import { Pressable, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import HomeTabIcon from '../assets/icons/HomeTabIcon';
 import TaskTabIcon from '../assets/icons/TaskTabIcon';
@@ -9,6 +9,7 @@ import TicketTabIcon from '../assets/icons/TicketTabIcon';
 import ProfileTabIcon from '../assets/icons/ProfileTabIcon';
 import SettingsTabIcon from '../assets/icons/SettingsTabIcon';
 import { Center } from 'native-base';
+import { LangContext } from '../App';
 
 const styles = StyleSheet.create({
     tabBarContainer: {
@@ -37,39 +38,70 @@ const styles = StyleSheet.create({
     settingsIcon: {
         marginTop: 5,
         transform: [{ scale: 1.2 }],
+    },
+    tabHeaderStyle: {
+        fontFamily: FONTS.cabinBold,
+        fontSize: 24,
+        lineHeight: 32,
     }
 })
 
 
 const schema = {
-    "Feed": <HomeTabIcon/>,
-    "Tasks": <TaskTabIcon/>,
-    "Ticket": <TicketTabIcon style={styles.ticketIcon}/>,
-    "Profile": <ProfileTabIcon style={styles.profileIcon}/>,
-    "Settings": <SettingsTabIcon style={styles.settingsIcon}/>,
+    "Feed": <HomeTabIcon />,
+    "Tasks": <TaskTabIcon />,
+    "Ticket": <TicketTabIcon style={styles.ticketIcon} />,
+    "Profile": <ProfileTabIcon style={styles.profileIcon} />,
+    "Settings": <SettingsTabIcon style={styles.settingsIcon} />,
 }
 
 
 const Tab = createBottomTabNavigator();
 
 export const MainApp = () => {
+
+    let translations = useContext(LangContext)
+    let userName = "Михайло"
+
     return (
-        <Tab.Navigator initialRouteName="Feed" backBehavior={"history"} detachInactiveScreens={false}
-            tabBar={(props) => <CustomTabBar key={props?.state?.key} {...props}  schema={schema}/>}
+        <Tab.Navigator initialRouteName="Feed" backBehavior={"history"}
+            screenOptions={{
+                headerTitleStyle: styles.tabHeaderStyle,
+                headerTransparent: true,
+            }}
+            detachInactiveScreens={false}
+            tabBar={(props) => <CustomTabBar key={props?.state?.key} {...props} schema={schema} />}
             safeAreaInsets={{ bottom: 0 }}
         >
-            <Tab.Screen name="Feed" component={Feed} />
-            <Tab.Screen name="Tasks" component={Tasks} />
-            <Tab.Screen name="Ticket" component={Ticket} o />
-            <Tab.Screen name="Profile" component={Profile} />
-            <Tab.Screen name="Settings" component={Settings} />
+            <Tab.Screen name="Feed" component={Feed}
+            options={{
+                title: `${translations?.homeScreen.headText}${userName} !`,
+            }} 
+            />
+            <Tab.Screen name="Tasks" component={Tasks}
+            options={{
+                title: `${translations?.taskScreen.headText}`,
+            }} 
+            />
+            <Tab.Screen name="Ticket" component={Ticket} 
+            options={{
+                title: `${translations?.ticketScreen.headText}`,
+            }}  />
+            <Tab.Screen name="Profile" component={Profile} 
+            options={{
+                title: `${translations?.profileScreen.headText}`,
+            }}  />
+            <Tab.Screen name="Settings" component={Settings} 
+            options={{
+                title: `${translations?.settingsScreen.headText}`,
+            }}  />
         </Tab.Navigator>
     )
 }
 
 
 
-const CustomTabBar = ({ state, descriptors, navigation}) => {
+const CustomTabBar = ({ state, descriptors, navigation }) => {
     const { width } = useWindowDimensions();
     const MARGIN = 0;
     const TAB_BAR_WIDTH = width - 2 * MARGIN;
@@ -118,7 +150,7 @@ const CustomTabBar = ({ state, descriptors, navigation}) => {
                         style={{ flex: 1 }}
                     >
                         <View style={styles.contentContainer}>
-                           <Center>{schema[route.name]}</Center> 
+                            <Center>{schema[route.name]}</Center>
                         </View>
                     </Pressable>
                 );

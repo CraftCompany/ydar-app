@@ -4,12 +4,16 @@ import { SignIn, SignUp } from './screens';
 import { NativeBaseProvider } from 'native-base';
 import { useFonts } from 'expo-font';
 import { StatusBar, Text } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Loader from './screens/loader';
 import { AuthProvider, useAuth } from './app/context/AuthContext';
 import { MainApp } from './screens/MainApp';
+import { ENGLISH_LANGUAGE, LANGUAGES, UKRAINIAN_LANGUAGE } from './constants/constants';
+import { readData } from './app/context/LanguageContext';
 
 const Stack = createNativeStackNavigator();
+
+export const LangContext = React.createContext();
 
 const Index = () => {
 
@@ -71,19 +75,42 @@ const Index = () => {
             component={SignUp}
           />
         </Stack.Group>
-        <Stack.Screen name="Home" component={MainApp}/>
+        <Stack.Screen name="Home" component={MainApp} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 export default function App() {
+
+  const [currentLanguage, setCurrentLanguage] = React.useState(LANGUAGES.ukrainian)
+
+  useEffect(() => {
+    let getLanguage = async () => {
+      const language = await readData({ key: 'language' })
+      if (language) {
+        setCurrentLanguage(language)
+      }
+    }
+    getLanguage()
+
+    return () => {
+      getLanguage()
+    }
+
+  }, [currentLanguage])
+
+  const translations = currentLanguage == LANGUAGES.ukrainian ? UKRAINIAN_LANGUAGE : ENGLISH_LANGUAGE
+
+
   return (
-    <AuthProvider>
-      <NativeBaseProvider>
-        <Index />
-      </NativeBaseProvider>
-    </AuthProvider>
+    <LangContext.Provider value={translations}>
+      <AuthProvider>
+        <NativeBaseProvider>
+          <Index />
+        </NativeBaseProvider>
+      </AuthProvider>
+    </LangContext.Provider>
   );
 }
 

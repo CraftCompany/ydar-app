@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Box } from 'native-base'
 import { COLORS } from '../constants/constants'
 import LoaderIcon from '../assets/icons/LoaderIcon'
 import * as Progress from 'react-native-progress';
+import { LangContext } from '../App'
 const Loader = ({loading}) => {
+
+    let translations = useContext(LangContext)
 
     let [progress, setProgress] = React.useState(0)
 
@@ -28,7 +31,7 @@ const Loader = ({loading}) => {
                 fontFamily: "Inter",
                 fontWeight: 400,
             }}>
-                <Text>ЗАВАНТАЖЕННЯ...</Text>
+                <Text>{translations.loader.headText}</Text>
                 <Progress.Bar width={315} height={10} borderColor={COLORS.black} color={COLORS.red} unfilledColor='#D9D9D900' progress={progress} />
             </Box>
         </Box>
