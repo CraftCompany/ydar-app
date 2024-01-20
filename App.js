@@ -9,7 +9,11 @@ import Loader from './screens/loader';
 import { AuthProvider, useAuth } from './app/context/AuthContext';
 import { MainApp } from './screens/MainApp';
 import { ENGLISH_LANGUAGE, LANGUAGES, UKRAINIAN_LANGUAGE } from './constants/constants';
-import { readData } from './app/context/LanguageContext';
+import { readData, storeData } from './app/context/AsyncStorageHandler';
+import { I18nextProvider, useTranslation } from 'react-i18next';
+import i18n from './i18n/i18n';
+import { getLocales } from 'expo-localization';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 
@@ -83,34 +87,35 @@ const Index = () => {
 
 export default function App() {
 
-  const [currentLanguage, setCurrentLanguage] = React.useState(LANGUAGES.ukrainian)
+  let languageCode = getLocales().shift().languageCode
 
   useEffect(() => {
-    let getLanguage = async () => {
-      const language = await readData({ key: 'language' })
-      if (language) {
-        setCurrentLanguage(language)
+
+    const initialLanguageSetter = async () => {
+      let statusCode = await AsyncStorage.getItem('language')
+      if(statusCode) {
+        i18n.changeLanguage(statusCode)
+      } else {
+        await AsyncStorage.setItem('language', languageCode)
+        i18n.changeLanguage(languageCode)  
       }
     }
-    getLanguage()
 
-    return () => {
-      getLanguage()
+    initialLanguageSetter()
+
+    return() => {
+     
     }
-
-  }, [currentLanguage])
-
-  const translations = currentLanguage == LANGUAGES.ukrainian ? UKRAINIAN_LANGUAGE : ENGLISH_LANGUAGE
-
+  },[])
 
   return (
-    <LangContext.Provider value={translations}>
-      <AuthProvider>
-        <NativeBaseProvider>
-          <Index />
-        </NativeBaseProvider>
-      </AuthProvider>
-    </LangContext.Provider>
+    <I18nextProvider i18n={i18n}>
+        <AuthProvider>
+          <NativeBaseProvider>
+            <Index />
+          </NativeBaseProvider>
+        </AuthProvider>
+    </I18nextProvider>
   );
 }
 

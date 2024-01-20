@@ -10,6 +10,7 @@ import ProfileTabIcon from '../assets/icons/ProfileTabIcon';
 import SettingsTabIcon from '../assets/icons/SettingsTabIcon';
 import { Center } from 'native-base';
 import { LangContext } from '../App';
+import { useTranslation } from 'react-i18next';
 
 const styles = StyleSheet.create({
     tabBarContainer: {
@@ -59,9 +60,9 @@ const schema = {
 const Tab = createBottomTabNavigator();
 
 export const MainApp = () => {
-
-    let translations = useContext(LangContext)
     let userName = "Михайло"
+
+    const {t} = useTranslation('tabHeaders')
 
     return (
         <Tab.Navigator initialRouteName="Feed" backBehavior={"history"}
@@ -75,25 +76,25 @@ export const MainApp = () => {
         >
             <Tab.Screen name="Feed" component={Feed}
             options={{
-                title: `${translations?.homeScreen.headText}${userName} !`,
+                title: `${t("home")}${userName} !`,
             }} 
             />
             <Tab.Screen name="Tasks" component={Tasks}
             options={{
-                title: `${translations?.taskScreen.headText}`,
+                title: `${t("tasks")}`,
             }} 
             />
             <Tab.Screen name="Ticket" component={Ticket} 
             options={{
-                title: `${translations?.ticketScreen.headText}`,
+                title: `${t("ticket")}`,
             }}  />
             <Tab.Screen name="Profile" component={Profile} 
             options={{
-                title: `${translations?.profileScreen.headText}`,
+                title: `${t("profile")}`,
             }}  />
             <Tab.Screen name="Settings" component={Settings} 
             options={{
-                title: `${translations?.settingsScreen.headText}`,
+                title: `${t("settings")}`,
             }}  />
         </Tab.Navigator>
     )

@@ -1,6 +1,6 @@
 import { Keyboard, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import React, { useContext } from 'react'
-import { Box, Stack, Text, Input, Pressable, Image, Icon, Checkbox, Button, Center } from 'native-base'
+import { Box, Stack, Text, Input, Pressable, Image, Icon, Checkbox, Button, Center, View } from 'native-base'
 import { COLORS, FONTS } from '../constants/constants'
 import GoogleIcon from '../assets/icons/GoogleIcon'
 import FacebookIcon from '../assets/icons/FacebookIcon'
@@ -14,6 +14,7 @@ import LeftLine from '../assets/icons/LeftLine'
 import LockIcon from '../assets/icons/LockIcon'
 import { SuccessSplash } from '../splashes/successSplash'
 import { LangContext } from '../App'
+import { useTranslation } from 'react-i18next'
 
 
 const SignIn = ({ navigation }) => {
@@ -31,8 +32,7 @@ const SignIn = ({ navigation }) => {
         setShowModal(true)
     }
 
-    let translations = useContext(LangContext)
-
+    const { t } = useTranslation('signUpScreen')
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -42,12 +42,12 @@ const SignIn = ({ navigation }) => {
                 <Box style={{
                     marginTop: 100,
                 }}>
-                    <Text style={styles.entryText}>{translations.signUpScreen.headText}</Text>
+                    <Text style={styles.entryText}>{t("headText")}</Text>
                 </Box>
                 <Box style={{
                     marginTop: 20,
                 }}>
-                    <Text style={styles.entryTextBottom}>{translations.signUpScreen.secondaryText}</Text>
+                    <Text style={styles.entryTextBottom}>{t("secondaryText")}</Text>
                 </Box>
                 <Stack direction="column" mb="2.5" mt="5" space={5}>
                     <Input
@@ -55,7 +55,7 @@ const SignIn = ({ navigation }) => {
                         size="lg"
                         variant="rounded"
                         InputLeftElement={<ProfileIcon style={{ marginLeft: 10 }} />}
-                        placeholder={translations.signUpScreen.name}
+                        placeholder={t("name")}
                         type='text'
                         _focus={styles.focusInput}
                         focusOutlineColor={COLORS.red}
@@ -70,7 +70,7 @@ const SignIn = ({ navigation }) => {
                         size="lg"
                         variant="rounded"
                         InputLeftElement={<MessageIcon style={{ marginLeft: 10 }} />}
-                        placeholder={translations.signUpScreen.email}
+                        placeholder={t("email")}
                         type='text'
                         _focus={styles.focusInput}
                         focusOutlineColor={COLORS.red}
@@ -86,7 +86,7 @@ const SignIn = ({ navigation }) => {
                         variant="rounded"
                         InputLeftElement={<LockIcon style={{ marginLeft: 10 }} />}
                         InputRightElement={<TouchableOpacity style={{ marginRight: 10 }} onPress={() => setShowPass(!showPass)}><ShowIcon /></TouchableOpacity>}
-                        placeholder={translations.signUpScreen.password}
+                        placeholder={t("password")}
                         type={showPass ? "text" : "password"}
                         _focus={styles.focusInput}
                         focusOutlineColor={COLORS.red}
@@ -96,16 +96,16 @@ const SignIn = ({ navigation }) => {
                         onChange={(e) => setPassword(e.nativeEvent.text)}
                         value={password}
                     />
-                    <Checkbox size="sm" colorScheme="red" borderColor={COLORS.red} value={accepted} onChange={setAccepted} style={{ marginLeft: 10 }}><Text style={styles.checkboxText}> {translations.signUpScreen.legal} </Text></Checkbox>
+                    <Checkbox size="sm" colorScheme="red" borderColor={COLORS.red} value={accepted} onChange={setAccepted} style={{ marginLeft: 10 }}><Text style={styles.checkboxText}> {t("legal")} </Text></Checkbox>
                     <Button size="lg" _text={styles.buttonText} variant="unstyled" style={styles.button} isDisabled={!accepted} onPress={handleModalOpen}>
-                        {translations.signUpScreen.continueButton}
+                        {t("continueButton")}
                     </Button>
                 </Stack>
                 <Box justifyContent="center" flexDirection="row" marginTop={15}>
                     <Text>
                         <Center flexDirection="row" _text={{ color: COLORS.lightGray }} >
                             <LeftLine style={{ marginRight: 2 }} />
-                            {translations.signUpScreen.socialMedia}
+                            {t("socialMedia")}
                             <RightLine style={{ marginLeft: 2 }} /></Center>
                     </Text>
 
@@ -167,8 +167,8 @@ const SignIn = ({ navigation }) => {
                     </Pressable>
                 </Stack>
                 <Box justifyContent="center" alignItems="center" style={styles.footerTextWrapper}>
-                    <Text style={styles.footerText}>{translations.signUpScreen.alreadyHaveAccount}</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate("SignIn")}><Text style={styles.footerTextLink}>{translations.signUpScreen.signInButton}</Text></TouchableOpacity>
+                    <Text style={styles.footerText}>{t("alreadyHaveAccount")}</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate("SignIn")}><Text style={styles.footerTextLink}>{t("signInButton")}</Text></TouchableOpacity>
                 </Box>
                 <SuccessSplash modalVisible={showModal} setModalVisible={setShowModal} />
             </Box>

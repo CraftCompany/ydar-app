@@ -1,0 +1,97 @@
+{
+  "loader": {
+    "headText": "Loading..."
+  },
+  "signUpScreen": {
+    "headText": "Welcome",
+    "secondaryText": "Please enter your account details below!",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "legal": "Accept terms and conditions",
+    "continueButton": "Continue",
+    "socialMedia": "Or continue with",
+    "alreadyHaveAccount": "Already have an account?",
+    "signInButton": "Sign In"
+  },
+  "signInScreen": {
+    "headText": "Welcome",
+    "secondaryText": "Please enter your login details below!",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "continueButton": "Continue",
+    "socialMedia": "Or continue with",
+    "dontHaveAccount": "Don't have an account?",
+    "signUpButton": "Sign Up"
+  },
+  "registrationPopUp": {
+    "headText": "Registration Successful!",
+    "secondaryText": "Your account has been created. Please wait a moment, processing data...",
+    "buttonText": "Creating..."
+  },
+  "homeScreen": {
+    "headText": "Hello, ",
+    "ticketText": "Youth Ticket",
+    "ticketPointText_1": "Point",
+    "ticketPointText_2": "Points",
+    "news": "News",
+    "events": "Events",
+    "personalTaskText": "Personal task text goes here...",
+    "showAll": "Show All"
+  },
+  "ticketScreen": {
+    "headText": "Youth Ticket",
+    "ticketPointText_1": "Point",
+    "ticketPointText_2": "Points",
+    "ticketPointText_3": "Points",
+    "rang": "Rank",
+    "secondaryText": "Completed tasks for the next level"
+  },
+  "eventScreen": {
+    "headText": "Events"
+  },
+  "savedScreen": {
+    "headText": "Saved",
+    "newsText": "News",
+    "eventsText": "Events"
+  },
+  "taskScreen": {
+    "headText": "Tasks"
+  },
+  "profileScreen": {
+    "headText": "My Profile",
+    "changeProfile": "Edit Profile",
+    "mySavings": "My Savings",
+    "statistics": "Statistics",
+    "aboutDeveloper": "About Developer",
+    "FAQ": "FAQ",
+    "feedback": "Feedback",
+    "logout": "Logout"
+  },
+  "settingsScreen": {
+    "headText": "Settings",
+    "notifications": "Notifications",
+    "language": "Language",
+    "en": "English",
+    "ukr": "Українська",
+    "aboutDeveloper": "About Developer",
+    "privacyPolicy": "Privacy Policy",
+    "FAQ": "FAQ",
+    "feedback": "Feedback",
+    "logout": "Logout"
+  },
+  "supportedLanguages": {
+    "en": "English",
+    "ukr": "Українська"
+  },
+  "tabHeaders" : {
+    "home": "Hello, ",
+    "tasks": "Tasks",
+    "ticket": "Youth ticket",
+    "profile": "My profile",
+    "settings": "Settings",
+    "events": "Events",
+    "saved": "Saved"  
+  }
+}

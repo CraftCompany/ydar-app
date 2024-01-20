@@ -18,6 +18,9 @@
       "supportsTablet": true,
       "config": {
         "usesNonExemptEncryption": false
+      },
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true
       }
     },
     "android": {
@@ -36,7 +39,12 @@
     },
     "owner": "craftproduct",
     "plugins": [
-      "expo-router"
-    ]
+      "expo-router",
+      "expo-localization"
+    ],
+    "locales": {
+      "en": "./metadata/en.json",
+      "ukr": "./metadata/ukr.json"
+    }
   }
 }

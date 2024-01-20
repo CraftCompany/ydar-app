@@ -5,32 +5,23 @@ import ArrowHomeScreen from '../../assets/icons/ArrowHomeScreen'
 import { ImageBackground, StyleSheet } from 'react-native'
 import { COLORS, FONTS } from '../../constants/constants'
 import { LangContext } from '../../App'
-import { pointTextChooser, ukrainianTextChooser } from '../../app/context/LanguageContext'
+import { pointTextChooser, ukrainianTextChooser } from '../../app/context/AsyncStorageHandler'
+import { useTranslation } from 'react-i18next'
 
 export const Feed = ({ navigation }) => {
   let [pointsText, setPointsText] = React.useState('points')
   const translations = useContext(LangContext)
   const number = 1
 
-  
-
-  // useEffect(() => {
-  //   let getPointsText = async () => {
-  //     let value = await ukrainianTextChooser({number})
-  //     setPointsText(value)
-  //   }
-  //   return () => {
-  //     getPointsText()
-  //   }
-  // }, [pointsText])
+  const {t} = useTranslation('homeScreen')
 
   return (
     <Box style={styles.feedContainerStyle} flex={1}>
 
       <Box style={styles.feedUserCardContainer}>
         <View style={styles.feedTextContainer}>
-          <Text style={styles.feedTextFirst}>{translations.homeScreen.ticketText}</Text>
-          <Text style={styles.feedTextSecond}>{number} {pointsText} </Text>
+          <Text style={styles.feedTextFirst}>{t("ticketText")}</Text>
+          <Text style={styles.feedTextSecond}>{number} {t("ticketPointText_2")} </Text>
         </View>
         <View>
           <Pressable onPress={() => navigation.navigate('Ticket')}>
@@ -40,9 +31,9 @@ export const Feed = ({ navigation }) => {
       </Box>
       <Box style={styles.feedNewsContainer}>
         <View flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
-          <Text style={styles.feedNewsHeadTextFirst}>{translations.homeScreen.news}</Text>
+          <Text style={styles.feedNewsHeadTextFirst}>{t("news")}</Text>
           <Pressable onPress={() => navigation.navigate('News')}>
-            <Text style={styles.feedNewsHeadTextSecond}>{translations.homeScreen.showAll}</Text>
+            <Text style={styles.feedNewsHeadTextSecond}>{t("showAll")}</Text>
           </Pressable>
         </View>
         <Box>
