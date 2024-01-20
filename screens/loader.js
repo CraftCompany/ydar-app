@@ -1,13 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useContext, useEffect } from 'react'
+import { StyleSheet, Text } from 'react-native'
+import React, { useEffect } from 'react'
 import { Box } from 'native-base'
 import { COLORS } from '../constants/constants'
 import LoaderIcon from '../assets/icons/LoaderIcon'
 import * as Progress from 'react-native-progress';
-import { LangContext } from '../App'
+import { useTranslation } from 'react-i18next'
 const Loader = ({loading}) => {
-
-    let translations = useContext(LangContext)
 
     let [progress, setProgress] = React.useState(0)
 
@@ -22,6 +20,8 @@ const Loader = ({loading}) => {
         }
     },[progress, loading])
 
+    const { t } = useTranslation('loader')
+
     return (
         <Box flex={1} style={styles.LoaderWrapper} justifyContent="center" alignItems="center">
             <LoaderIcon style={styles.loaderImage} alignSelf="center" />
@@ -31,7 +31,7 @@ const Loader = ({loading}) => {
                 fontFamily: "Inter",
                 fontWeight: 400,
             }}>
-                <Text>{translations.loader.headText}</Text>
+                <Text>{t('headText')}</Text>
                 <Progress.Bar width={315} height={10} borderColor={COLORS.black} color={COLORS.red} unfilledColor='#D9D9D900' progress={progress} />
             </Box>
         </Box>

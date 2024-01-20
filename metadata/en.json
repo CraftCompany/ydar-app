@@ -1,0 +1,5 @@
+{
+    "CFBundleDisplayName": "My cooking app",
+    "NSCameraUsageDescription": "The app need to use the camera so you can take photos of your dishes",
+    "NSLocationWhenInUseUsageDescription": "The app needs access to your location to share the address of your favorite restorants"
+  }

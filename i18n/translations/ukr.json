@@ -1,0 +1,98 @@
+  {
+    "loader": {
+      "headText": "Завантаження..."
+    },
+    "signUpScreen": {
+      "headText": "Ласкаво просимо",
+      "secondaryText": "Будь ласка, введіть дані свого облікового запису нижче!",
+      "name": "Ім'я",
+      "email": "Email",
+      "password": "Пароль",
+      "legal": "Прийміть положення та умови",
+      "continueButton": "Продовжити",
+      "socialMedia": "Або продовжити через",
+      "alreadyHaveAccount": "Вже маєте обліковий запис?",
+      "signInButton": "Увійти"
+    },
+    "signInScreen": {
+      "headText": "Ласкаво просимо",
+      "secondaryText": "Будь ласка, введіть свої дані для входу нижче!",
+      "email": "Email",
+      "password": "Пароль",
+      "forgotPassword": "Забули пароль?",
+      "continueButton": "Продовжити",
+      "socialMedia": "Або продовжити через",
+      "dontHaveAccount": "Не маєте облікового запису в нас?",
+      "signUpButton": "Зареєструватися"
+    },
+    "registrationPopUp": {
+      "headText": "Реєстрація успішна!",
+      "secondaryText": "Ваш обліковий запис створено. Зачекайте хвилинку, обробка даних...",
+      "buttonText": "Створення..."
+    },
+    "homeScreen": {
+      "headText": "Привіт, ",
+      "ticketText": "Молодіжний квиток",
+      "ticketPointText_1": "Бал",
+      "ticketPointText_2": "Бали",
+      "ticketPointText_3": "Балів",
+      "news": "Новини",
+      "events": "Івенти",
+      "personalTaskText": "Персональне завдання текст до них...",
+      "showAll": "Подивитись все"
+    },
+    "taskScreen": {
+      "headText": "Завдання"
+    },
+    "ticketScreen": {
+      "headText": "Молодіжний квиток",
+      "ticketPointText_1": "Бал",
+      "ticketPointText_2": "Бали",
+      "ticketPointText_3": "Балів",
+      "rang": "Звання",
+      "secondaryText": "Виконано завдань до наступного рівня"
+    },
+    "profileScreen": {
+      "headText": "Мій профіль",
+      "changeProfile": "Редагувати профіль",
+      "mySavings": "Мої збереження",
+      "statistics": "Статистика",
+      "aboutDeveloper": "Про розробника",
+      "FAQ": "Часті запитання",
+      "feedback": "Зворотній зв'язок",
+      "logout": "Вийти"
+    },
+    "settingsScreen": {
+      "headText": "Налаштування",
+      "notifications": "Повідомлення",
+      "language": "Мова",
+      "aboutDeveloper": "Про розробника",
+      "privacyPolicy": "Приватна політика",
+      "FAQ": "Часті запитання",
+      "feedback": "Зворотній зв'язок",
+      "logout": "Вийти",
+      "en": "English",
+      "ukr": "Українська"
+    },
+    "eventScreen": {
+      "headText": "Івенти"
+    },
+    "savedScreen": {
+      "headText": "Збереження",
+      "newsText": "Новини",
+      "eventsText": "Івенти"
+    },
+    "supportedLanguages": {
+      "en": "English",
+      "ukr": "Українська"
+    },
+    "tabHeaders" : {
+      "home": "Привіт, ",
+      "tasks": "Завдання",
+      "ticket": "Молодіжний квиток",
+      "profile": "Мій профіль",
+      "settings": "Налаштування",
+      "events": "Івенти",
+      "saved": "Збереження"  
+    }
+  }
