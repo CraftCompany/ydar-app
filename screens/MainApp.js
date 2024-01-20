@@ -149,6 +149,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
                         onPress={onPress}
                         onLongPress={onLongPress}
                         style={{ flex: 1 }}
+                        key={index}
                     >
                         <View style={styles.contentContainer}>
                             <Center>{schema[route.name]}</Center>

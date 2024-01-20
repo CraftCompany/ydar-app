@@ -3,17 +3,21 @@ import SuccessIcon from '../assets/icons/SuccessIcon';
 import { Box, Center, Modal, Text, View } from 'native-base';
 import { COLORS, FONTS } from '../constants/constants';
 import { StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 export const SuccessSplash = ({modalVisible, setModalVisible}) => {
+
+    const {t} = useTranslation('registrationPopUp')
+
   return (
    <Modal isOpen={modalVisible} onClose={setModalVisible}>
     <Modal.Content width={'80%'} height={'40%'} justifyContent={'center'} alignItems={'center'} borderColor={COLORS.red} borderWidth={'1px'}>
         <Box alignItems={'center'} flex={1} width={'90%'} paddingTop={'30px'}>
             <SuccessIcon />
-            <Text style={styles.entryText}>Реєстрація успішна!</Text>
-            <Text style={styles.secondaryText}>Ваш обліковий запис створено. Зачекайте хвилинку, обробка даних...</Text>
+            <Text style={styles.entryText}>{t('headText')}</Text>
+            <Text style={styles.secondaryText}>{t('secondaryText')}</Text>
             <View backgroundColor={'#ff0000'} paddingY={'14px'} paddingX={'10px'} borderRadius={'30px'} width={'80%'} marginTop={'30px'} >
-                <Center><Text style={styles.badgeText}>Створення...</Text></Center>
+                <Center><Text style={styles.badgeText}>{t("buttonText")}</Text></Center>
             </View>
         </Box>
     </Modal.Content>

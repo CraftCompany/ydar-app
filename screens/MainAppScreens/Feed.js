@@ -1,4 +1,4 @@
-import { Box, Pressable, Text, View } from 'native-base'
+import { Box, Image, Pressable, ScrollView, Text, View } from 'native-base'
 import React, { useContext, useEffect } from 'react'
 import ProfileHomeScreen from '../../assets/icons/ProfileHomeScreen'
 import ArrowHomeScreen from '../../assets/icons/ArrowHomeScreen'
@@ -7,16 +7,16 @@ import { COLORS, FONTS } from '../../constants/constants'
 import { LangContext } from '../../App'
 import { pointTextChooser, ukrainianTextChooser } from '../../app/context/AsyncStorageHandler'
 import { useTranslation } from 'react-i18next'
+import { mockImages } from '../../assets/mockImages'
+import { EventsItem, NewsItem } from '../components/FeedScreenItems'
 
 export const Feed = ({ navigation }) => {
-  let [pointsText, setPointsText] = React.useState('points')
-  const translations = useContext(LangContext)
   const number = 1
 
-  const {t} = useTranslation('homeScreen')
+  const { t } = useTranslation('homeScreen')
 
   return (
-    <Box style={styles.feedContainerStyle} flex={1}>
+    <ScrollView style={styles.feedContainerStyle} flex={1} h={100}>
 
       <Box style={styles.feedUserCardContainer}>
         <View style={styles.feedTextContainer}>
@@ -29,31 +29,26 @@ export const Feed = ({ navigation }) => {
           </Pressable>
         </View>
       </Box>
-      <Box style={styles.feedNewsContainer}>
-        <View flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
-          <Text style={styles.feedNewsHeadTextFirst}>{t("news")}</Text>
-          <Pressable onPress={() => navigation.navigate('News')}>
-            <Text style={styles.feedNewsHeadTextSecond}>{t("showAll")}</Text>
-          </Pressable>
+      <NewsItem images={mockImages} />
+      <Box style={styles.feedTasksContainer} flexDirection={'row'} alignItems={'center'}>
+        <View style={styles.feedTasksImageContainer} flexDirection={'row'}>
+          {mockImages.map((image, index) => <Image key={index} source={image} size={62} style={styles.feedTasksImage} borderRadius={100} alt='image' left={index * 5} zIndex={
+            index === 0 ? 5 :
+              index === 1 ? 4 :
+                3
+          } />)}
         </View>
-        <Box>
-
-        </Box>
-        <View>
-
+        <View style={styles.feedTasksTextContainer}>
+          <Text style={styles.feedTasksText} height={"42px"} width={"172px"}>
+            {t('personalTaskText')}
+          </Text>
+          <ArrowHomeScreen style={{
+            transform: [{ scale: 1.5 }]
+          }} />
         </View>
       </Box>
-    </Box>
-  )
-}
-
-const NewsItem = ({image}) => {
-  return (
-    <Box style={styles.newsItemContainer}>
-      <ImageBackground >
-
-      </ImageBackground>
-    </Box>
+      <EventsItem images={mockImages} />
+    </ScrollView>
   )
 }
 
@@ -90,25 +85,45 @@ const styles = StyleSheet.create({
     color: COLORS.white,
     width: '100%'
   },
-  feedNewsContainer: {
-    paddingTop: 20,
-    borderColor: COLORS.lightGray,
-    borderWidth: 1,
+  feedTasksContainer: {
+    marginTop: 10,
+    height: 93,
+    backgroundColor: COLORS.homeWhite,
+    shadowColor: '#F0E9E2',
+    shadowOpacity: 1,
+    shadowRadius: 10,
+    borderRadius: 15,
+    shadowOffset: {
+      height: -2,
+      width: 0
+    },
+    elevation: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    alignContent: 'center'
   },
-  feedNewsHeadTextFirst: {
-    fontFamily: FONTS.cabinBold,
-    fontSize: 23,
-    lineHeight: 32,
+  feedTasksImageContainer: {
+    position: 'relative',
+    width: 120,
+    height: 50
   },
-  feedNewsHeadTextSecond: {
+  feedTasksImage: {
+    borderWidth: 3,
+    borderColor: "#EEEEEE",
+    position: 'absolute',
+    top: -5,
+  },
+  feedTasksTextContainer: {
+    width: 210,
+    height: 50,
+    borderRadius: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  feedTasksText: {
     fontFamily: FONTS.montserratMedium,
-    fontSize: 15,
+    fontSize: 14,
     lineHeight: 21,
-    color: COLORS.red,
-  },
-  newsItemContainer: {
-    width: 160,
-    height: 140,
-    borderRadius: 10,
-  },
+  }
 })
