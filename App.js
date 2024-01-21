@@ -8,12 +8,12 @@ import React, { useEffect } from 'react';
 import Loader from './screens/loader';
 import { AuthProvider, useAuth } from './app/context/AuthContext';
 import { MainApp } from './screens/MainApp';
-import { ENGLISH_LANGUAGE, LANGUAGES, UKRAINIAN_LANGUAGE } from './constants/constants';
-import { readData, storeData } from './app/context/AsyncStorageHandler';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from './i18n/i18n';
 import { getLocales } from 'expo-localization';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import 'react-native-gesture-handler';
+
 
 const Stack = createNativeStackNavigator();
 

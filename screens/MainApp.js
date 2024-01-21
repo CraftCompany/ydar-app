@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Feed, Tasks, Ticket, Profile, Settings } from './MainAppScreens';
+import { Tasks, Ticket, Profile, Settings } from './MainAppScreens';
 import { COLORS, FONTS } from '../constants/constants';
 import { Pressable, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import HomeTabIcon from '../assets/icons/HomeTabIcon';
@@ -11,6 +11,9 @@ import SettingsTabIcon from '../assets/icons/SettingsTabIcon';
 import { Center } from 'native-base';
 import { LangContext } from '../App';
 import { useTranslation } from 'react-i18next';
+import { FeedNavigationContainer } from './MainAppScreens/Feed';
+
+import {Events} from './MainAppScreens/Events'
 
 const styles = StyleSheet.create({
     tabBarContainer: {
@@ -60,41 +63,41 @@ const schema = {
 const Tab = createBottomTabNavigator();
 
 export const MainApp = () => {
-    let userName = "Михайло"
 
-    const {t} = useTranslation('tabHeaders')
+    const { t } = useTranslation('tabHeaders')
 
     return (
         <Tab.Navigator initialRouteName="Feed" backBehavior={"history"}
             screenOptions={{
                 headerTitleStyle: styles.tabHeaderStyle,
                 headerTransparent: true,
+                headerShown: false
             }}
-            detachInactiveScreens={true}
             tabBar={(props) => <CustomTabBar key={props?.state?.key} {...props} schema={schema} />}
             safeAreaInsets={{ bottom: 0 }}
+            detachInactiveScreens={true}
         >
-            <Tab.Screen name="Feed" component={Feed} 
-            options={{
-                title: `${t("home")}${userName} !`,
-            }}
-            />
+            <Tab.Screen name="Feed" component={FeedNavigationContainer} />
             <Tab.Screen name="Tasks" component={Tasks}
             options={{
                 title: `${t("tasks")}`,
+                headerShown: true
             }} 
             />
             <Tab.Screen name="Ticket" component={Ticket} 
             options={{
                 title: `${t("ticket")}`,
+                headerShown: true
             }}  />
             <Tab.Screen name="Profile" component={Profile} 
             options={{
                 title: `${t("profile")}`,
+                headerShown: true
             }}  />
             <Tab.Screen name="Settings" component={Settings} 
             options={{
                 title: `${t("settings")}`,
+                headerShown: true
             }}  />
         </Tab.Navigator>
     )

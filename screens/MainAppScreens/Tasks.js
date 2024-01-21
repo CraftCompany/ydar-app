@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    minHeight: 75,
+    height: 75,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: COLORS.red,

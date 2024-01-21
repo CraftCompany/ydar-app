@@ -9,7 +9,7 @@ const NewsEventsItem = ({flag}) => {
     return (
       <Box style={styles.itemContainer}>
         <View style={styles.imageContainer}>
-            <Image source={require('../../assets/images.jpg')} style={styles.image}/>
+            <Image source={require('../../assets/images.jpg')} style={styles.image} alt='image'/>
         </View>
         <View style={styles.infoContainer}>
             <Text style={styles.itemInfo}>{flag == 'Events' ? '05:46:23' : 'Група новин'}</Text>

@@ -3,16 +3,21 @@ import { COLORS, FONTS } from "../../constants/constants"
 import { Box, Pressable, Text, View } from "native-base"
 import HeartIcon from "../../assets/icons/HeartIcon"
 import { useTranslation } from "react-i18next"
+import { useNavigation } from '@react-navigation/native';
 
-export const NewsItem = ({ images, navigation }) => {
+export const NewsItem = ({ images }) => {
 
   const { t } = useTranslation('homeScreen')
+
+  let navigation = useNavigation()
 
   return (
     <Box style={styles.feedContainer}>
       <View flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
         <Text style={styles.feedHeadTextFirst}>{t("news")}</Text>
-        <Pressable onPress={() => navigation.navigate('News')}>
+        <Pressable onPress={() => {
+          navigation.navigate('News')
+          }}>
           <Text style={styles.feedHeadTextSecond}>{t("showAll")}</Text>
         </Pressable>
       </View>
@@ -23,9 +28,11 @@ export const NewsItem = ({ images, navigation }) => {
   )
 }
 
-export const EventsItem = ({ images, navigation }) => {
+export const EventsItem = ({ images }) => {
 
   const { t } = useTranslation('homeScreen')
+
+  let navigation = useNavigation()
 
   return (
     <Box style={styles.feedContainer}>

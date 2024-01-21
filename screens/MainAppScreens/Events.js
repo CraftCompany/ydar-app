@@ -4,7 +4,24 @@ import { StyleSheet } from 'react-native'
 import React from 'react'
 import NewsEventsItem from '../components/NewsEventsScreenItem'
 
+import { useIsFocused, useNavigation, useFocusEffect } from '@react-navigation/native';
+
 export const Events = () => {
+
+  const isFocused = useIsFocused();
+
+  const navigation = useNavigation();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        if(!isFocused) {
+          navigation.goBack()
+        }
+      };
+    }, [isFocused])
+  );
+
   return (
     <View style={styles.feedContainerStyle} flex={1}>
       <NewsEventsItem flag={'Events'}/>

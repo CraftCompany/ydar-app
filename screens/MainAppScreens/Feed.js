@@ -1,23 +1,68 @@
 import { Box, Image, Pressable, ScrollView, Text, View } from 'native-base'
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import ProfileHomeScreen from '../../assets/icons/ProfileHomeScreen'
 import ArrowHomeScreen from '../../assets/icons/ArrowHomeScreen'
-import { ImageBackground, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { COLORS, FONTS } from '../../constants/constants'
-import { LangContext } from '../../App'
-import { pointTextChooser, ukrainianTextChooser } from '../../app/context/AsyncStorageHandler'
 import { useTranslation } from 'react-i18next'
 import { mockImages } from '../../assets/mockImages'
 import { EventsItem, NewsItem } from '../components/FeedScreenItems'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { News } from './News'
+import { Events } from './Events'
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
-export const Feed = ({ navigation }) => {
+const FeedNavigator = createNativeStackNavigator()
+
+export const FeedNavigationContainer = () => {
+
+  let userName = "Михайло"
+
+  const { t } = useTranslation('homeScreen')
+  const { t:headerTitle } = useTranslation('tabHeaders')
+
+  return (
+    <FeedNavigator.Navigator
+      screenOptions={{
+        headerBackVisible: false,
+        headerTitleStyle: styles.headerStyle,
+      }}
+      initialRouteName='feed'
+      detachInactiveScreens={true}
+    >
+      <FeedNavigator.Screen
+        name='feed'
+        component={Feed}
+        options={{
+          title: `${headerTitle("home")}${userName} !`,
+          headerShown: true,
+          headerTransparent: true,
+        }}
+      />
+      <FeedNavigator.Screen
+        name='News'
+        options={{ title: t('news'), headerTransparent: true, gestureEnabled: true }}
+        component={News}
+      />
+      <FeedNavigator.Screen
+        name='Events'
+        options={{ title: t('events'), headerTransparent: true, gestureEnabled: true }}
+        component={Events}
+      />
+    </FeedNavigator.Navigator>
+  );
+}
+
+
+const Feed = ({ navigation }) => {
   const number = 1
 
   const { t } = useTranslation('homeScreen')
 
+  const isFocused = useIsFocused();
+
   return (
     <ScrollView style={styles.feedContainerStyle} flex={1} h={100}>
-
       <Box style={styles.feedUserCardContainer}>
         <View style={styles.feedTextContainer}>
           <Text style={styles.feedTextFirst}>{t("ticketText")}</Text>
@@ -29,7 +74,7 @@ export const Feed = ({ navigation }) => {
           </Pressable>
         </View>
       </Box>
-      <NewsItem images={mockImages} navigation={navigation}/>
+      <NewsItem images={mockImages} />
       <Box style={styles.feedTasksContainer} flexDirection={'row'} alignItems={'center'}>
         <View style={styles.feedTasksImageContainer} flexDirection={'row'}>
           {mockImages.map((image, index) => <Image key={index} source={image} size={62} style={styles.feedTasksImage} borderRadius={100} alt='image' left={index * 5} zIndex={
@@ -42,12 +87,14 @@ export const Feed = ({ navigation }) => {
           <Text style={styles.feedTasksText} height={"42px"} width={"172px"}>
             {t('personalTaskText')}
           </Text>
-          <ArrowHomeScreen style={{
-            transform: [{ scale: 1.5 }]
-          }} />
+          <Pressable onPress={() => navigation.jumpTo('Tasks')} >
+            <ArrowHomeScreen style={{
+              transform: [{ scale: 1.5 }]
+            }} />
+          </Pressable>
         </View>
       </Box>
-      <EventsItem images={mockImages} navigation={navigation}/>
+      <EventsItem images={mockImages} />
     </ScrollView>
   )
 }
@@ -125,5 +172,10 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.montserratMedium,
     fontSize: 14,
     lineHeight: 21,
+  },
+  headerStyle: {
+    fontFamily: FONTS.cabinBold,
+    fontSize: 24,
+    lineHeight: 32,
   }
 })
