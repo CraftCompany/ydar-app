@@ -29,7 +29,7 @@ export const Feed = ({ navigation }) => {
           </Pressable>
         </View>
       </Box>
-      <NewsItem images={mockImages} />
+      <NewsItem images={mockImages} navigation={navigation}/>
       <Box style={styles.feedTasksContainer} flexDirection={'row'} alignItems={'center'}>
         <View style={styles.feedTasksImageContainer} flexDirection={'row'}>
           {mockImages.map((image, index) => <Image key={index} source={image} size={62} style={styles.feedTasksImage} borderRadius={100} alt='image' left={index * 5} zIndex={
@@ -47,7 +47,7 @@ export const Feed = ({ navigation }) => {
           }} />
         </View>
       </Box>
-      <EventsItem images={mockImages} />
+      <EventsItem images={mockImages} navigation={navigation}/>
     </ScrollView>
   )
 }

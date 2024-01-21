@@ -31,7 +31,7 @@ export const EventsItem = ({ images, navigation }) => {
     <Box style={styles.feedContainer}>
       <View flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
         <Text style={styles.feedHeadTextFirst}>{t("events")}</Text>
-        <Pressable onPress={() => navigation.navigate('News')}>
+        <Pressable onPress={() => navigation.navigate('Events')}>
           <Text style={styles.feedHeadTextSecond}>{t("showAll")}</Text>
         </Pressable>
       </View>
@@ -93,8 +93,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 6,
     alignSelf: 'flex-end',
-    marginTop: 8,
-    marginRight: 8,
     backgroundColor: "rgba(255, 255, 255, 0.25)"
   },
   itemInformationContainer: {

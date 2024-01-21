@@ -70,14 +70,14 @@ export const MainApp = () => {
                 headerTitleStyle: styles.tabHeaderStyle,
                 headerTransparent: true,
             }}
-            detachInactiveScreens={false}
+            detachInactiveScreens={true}
             tabBar={(props) => <CustomTabBar key={props?.state?.key} {...props} schema={schema} />}
             safeAreaInsets={{ bottom: 0 }}
         >
-            <Tab.Screen name="Feed" component={Feed}
+            <Tab.Screen name="Feed" component={Feed} 
             options={{
                 title: `${t("home")}${userName} !`,
-            }} 
+            }}
             />
             <Tab.Screen name="Tasks" component={Tasks}
             options={{
