@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import { FeedNavigationContainer } from './MainAppScreens/Feed';
 
 import {Events} from './MainAppScreens/Events'
+import { SettingsNavigationContainer } from './MainAppScreens/Settings';
 
 const styles = StyleSheet.create({
     tabBarContainer: {
@@ -94,11 +95,7 @@ export const MainApp = () => {
                 title: `${t("profile")}`,
                 headerShown: true
             }}  />
-            <Tab.Screen name="Settings" component={Settings} 
-            options={{
-                title: `${t("settings")}`,
-                headerShown: true
-            }}  />
+            <Tab.Screen name="Settings" component={SettingsNavigationContainer} />
         </Tab.Navigator>
     )
 }
