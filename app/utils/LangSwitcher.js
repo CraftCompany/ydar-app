@@ -4,6 +4,7 @@ import { Text, View, Pressable } from 'native-base';
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from "react-i18next";
 import { StyleSheet } from "react-native";
+import { COLORS } from '../../constants/constants';
 
  const LangSwitcher = () => {
     const { i18n, t } = useTranslation("settingsScreen");
@@ -18,7 +19,7 @@ import { StyleSheet } from "react-native";
 
   return (
     <View style={styles.container}>
-    <Text style={styles.title}>{t("language")}</Text>
+    {/* <Text style={styles.title}>{t("language")}</Text> */}
     {supportedLanguages.map((lng) => (
       <Pressable
         onPress={async () => await changeLanguage(lng)}
@@ -36,10 +37,11 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#fff",
+      backgroundColor: COLORS.white,
       alignItems: "center",
-      justifyContent: "center",
+      justifyContent: "flex-start",
       padding: 16,
+      paddingTop: 110,
     },
     title: {
       marginBottom: 16,
