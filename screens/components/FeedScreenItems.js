@@ -4,17 +4,18 @@ import { Box, Pressable, Text, View } from "native-base"
 import HeartIcon from "../../assets/icons/HeartIcon"
 import { useTranslation } from "react-i18next"
 import { useNavigation } from '@react-navigation/native';
+import { useTheme } from "../../app/context/ThemeContext"
 
 export const NewsItem = ({ images }) => {
 
   const { t } = useTranslation('homeScreen')
-
+  const { theme } = useTheme();
   let navigation = useNavigation()
 
   return (
     <Box style={styles.feedContainer}>
       <View flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
-        <Text style={styles.feedHeadTextFirst}>{t("news")}</Text>
+        <Text style={[styles.feedHeadTextFirst, {color: theme.textColor1}]}>{t("news")}</Text>
         <Pressable onPress={() => {
           navigation.navigate('News')
           }}>
@@ -31,13 +32,13 @@ export const NewsItem = ({ images }) => {
 export const EventsItem = ({ images }) => {
 
   const { t } = useTranslation('homeScreen')
-
+  const { theme } = useTheme();
   let navigation = useNavigation()
 
   return (
     <Box style={styles.feedContainer}>
       <View flexDirection={'row'} justifyContent={'space-between'} alignItems={'center'}>
-        <Text style={styles.feedHeadTextFirst}>{t("events")}</Text>
+        <Text style={[styles.feedHeadTextFirst, {color: theme.textColor1}]}>{t("events")}</Text>
         <Pressable onPress={() => navigation.navigate('Events')}>
           <Text style={styles.feedHeadTextSecond}>{t("showAll")}</Text>
         </Pressable>

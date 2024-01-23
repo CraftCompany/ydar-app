@@ -13,6 +13,7 @@ import i18n from './i18n/i18n';
 import { getLocales } from 'expo-localization';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import 'react-native-gesture-handler';
+import { ThemeProvider, useTheme } from './app/context/ThemeContext';
 
 
 const Stack = createNativeStackNavigator();
@@ -110,11 +111,13 @@ export default function App() {
 
   return (
     <I18nextProvider i18n={i18n}>
+      <ThemeProvider>
         <AuthProvider>
           <NativeBaseProvider>
             <Index />
           </NativeBaseProvider>
         </AuthProvider>
+      </ThemeProvider>
     </I18nextProvider>
   );
 }

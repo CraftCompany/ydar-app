@@ -1,18 +1,18 @@
 import React from 'react'
-import { Text, View, Pressable, Image } from 'native-base';
+import { Text, View, Pressable, Image } from 'native-base'
 import LangSwitcher from '../../app/utils/LangSwitcher'
 import { StyleSheet } from 'react-native'
 import { COLORS, FONTS } from '../../constants/constants'
 import { useTranslation } from 'react-i18next'
-import Bluebell from '../../assets/icons/Bluebell';
-import LockIcon from '../../assets/icons/LockIcon';
-import ArrowSettingsScreen from '../../assets/icons/ArrowSettingsScreen';
-import TranslateLanguageIcon from '../../assets/icons/TranslateLanguageIcon';
-import QuestionMarkIcon from '../../assets/icons/QuestionMarkIcon';
-import LetterIcon from '../../assets/icons/LetterIcon';
-import LogOutIcon from '../../assets/icons/LogOutIcon';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Bluebell from '../../assets/icons/Bluebell'
+import LockIcon from '../../assets/icons/LockIcon'
+import ArrowSettingsScreen from '../../assets/icons/ArrowSettingsScreen'
+import TranslateLanguageIcon from '../../assets/icons/TranslateLanguageIcon'
+import QuestionMarkIcon from '../../assets/icons/QuestionMarkIcon'
+import LetterIcon from '../../assets/icons/LetterIcon'
+import LogOutIcon from '../../assets/icons/LogOutIcon'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { useTheme } from '../../app/context/ThemeContext'
 
 
 const SettingsNavigator = createNativeStackNavigator()
@@ -21,6 +21,17 @@ export const SettingsNavigationContainer = () => {
 
   const { t } = useTranslation('settingsScreen')
   const { t:headerTitle } = useTranslation('tabHeaders')
+
+  const { theme } = useTheme()
+
+  const styles = StyleSheet.create({
+    headerStyle: {
+      color: theme.textColor1,
+      fontFamily: FONTS.cabinBold,
+      fontSize: 24,
+      lineHeight: 32,
+    }
+  })
 
   return (
     <SettingsNavigator.Navigator
@@ -52,42 +63,124 @@ export const SettingsNavigationContainer = () => {
 export const Settings = ({navigation}) => {
 
   const { t } = useTranslation('settingsScreen')
+  const { theme, toggleTheme, isDarkTheme } = useTheme();
 
+  const styles = StyleSheet.create({
+    settingsContainerStyle: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      backgroundColor: theme.bodyBackground,
+      paddingHorizontal: 20,
+      paddingTop: 50,
+      height: '100%',
+      position: 'relative',
+    },
+    avatarContainer: {
+      width: '17vh',
+      height: '17vh',
+      borderRadius: '50%',
+      borderColor: theme.borderColor,
+      borderWidth: 3,
+      top: '4%',
+      zIndex: 5,
+    },
+    settingsContainer: {
+      flexDirection: 'column',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      width: '100%',
+      height: '60%',
+      backgroundColor: theme.containerBackground,
+      borderRadius: 16,
+      shadowColor: 'rgba(0, 0, 0, 0.10)',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 1,
+      shadowRadius: 4,
+      elevation: 2,
+      padding: 20,
+      gap: 20
+    },
+    personInfoContainer: {
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      
+    },
+    personName: {
+      fontFamily: FONTS.cabin,
+      fontSize: 24,
+      fontWeight: 600,
+      color: theme.textColor1,
+    },
+    personEmail: {
+      fontFamily: FONTS.cabin,
+      fontSize: 13,
+      fontWeight: 700,
+      color: theme.textColor2,
+    },
+    contentContainer: {
+      position: 'relative',
+      flexDirection: 'row',
+      alignItems: 'center',
+      width: '100%',
+      gap: '5%'
+    },
+    settingsText: {
+      fontFamily: FONTS.cabin,
+      fontSize: 15,
+      fontWeight: 700,
+      color: theme.textColor1,
+      width: '75%',
+    },
+    image: {
+      width: '100%',
+      height: '100%',
+      resizeMode: 'cover',  
+    },
+    iconContainer: {
+      width: 30,
+      height: 30,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+  })
+  
   const settingsList = [
     {
-      icon: <Bluebell />,
+      icon: <Bluebell fill={theme.textColor1}/>,
       text: t("notifications"),
-      navigate: 'LangSwitcher'
+      onPress: console.log('+')
     },
     {
-      icon: <TranslateLanguageIcon />,
+      icon: <TranslateLanguageIcon fill={theme.textColor1}/>,
       text: t("language"),
-      navigate: 'LangSwitcher',
+      onPress: () => navigation.navigate('LangSwitcher'),
     },
     {
-      icon: <LockIcon />,
+      icon: <LockIcon fill={isDarkTheme ? theme.textColor1 : null}/>,
       text: t("aboutDeveloper"),
-      navigate: 'LangSwitcher'    
+      onPress: () => toggleTheme()    
     },
     {
-      icon: <LockIcon />,
+      icon: <LockIcon fill={isDarkTheme ? theme.textColor1 : null}/>,
       text: t("privacyPolicy"),
-      navigate: 'LangSwitcher'
+      onPress: console.log('+')
     },
     {
-      icon: <QuestionMarkIcon />,
+      icon: <QuestionMarkIcon fill={theme.textColor1}/>,
       text: t("FAQ"),
-      navigate: 'LangSwitcher'    
+      onPress: console.log('+')
     },
     {
-      icon: <LetterIcon />,
+      icon: <LetterIcon fill={theme.textColor1}/>,
       text: t("feedback"),
-      navigate: 'LangSwitcher'    
+      onPress: console.log('+')   
     },
     {
-      icon: <LogOutIcon />,
+      icon: <LogOutIcon fill={theme.textColor1}/>,
       text: t("logout"),
-      navigate: 'LangSwitcher'
+      onPress: console.log('+')
     },
   ]
 
@@ -114,11 +207,22 @@ export const Settings = ({navigation}) => {
                 <View style={styles.iconContainer}>
                   {item.icon}
                 </View>
-                <Text style={styles.settingsText}>
-                  {item.text}
-                </Text>
-                <Pressable onPress={()=>{navigation.navigate(item.navigate)}}>
-                  <ArrowSettingsScreen />
+                {
+                  item.text == t("language") ? 
+                  <>
+                    <Text style={[styles.settingsText, {width: '45%'}]}>
+                      {item.text}
+                    </Text>
+                    <Text style={[styles.settingsText, {width: '25%', color: COLORS.red}]}>
+                      {t("currentLanguage")}
+                    </Text>
+                  </> : 
+                  <Text style={styles.settingsText}>
+                    {item.text}
+                  </Text>
+                }
+                <Pressable onPress={item.onPress}>
+                  <ArrowSettingsScreen fill={theme.textColor1}/>
                 </Pressable>
               </View>
             )
@@ -128,89 +232,3 @@ export const Settings = ({navigation}) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  settingsContainerStyle: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: COLORS.white,
-    paddingHorizontal: 20,
-    paddingTop: 50,
-    height: '100%',
-    position: 'relative'
-  },
-  avatarContainer: {
-    width: '17vh',
-    height: '17vh',
-    borderRadius: '50%',
-    borderColor: COLORS.black,
-    borderWidth: 3,
-    top: '4%',
-    zIndex: 5
-  },
-  settingsContainer: {
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    width: '100%',
-    height: '60%',
-    backgroundColor: 'rgba(188, 183, 183, 0.15)',
-    borderRadius: 16,
-    shadowColor: 'rgba(0, 0, 0, 0.10)',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 1,
-    shadowRadius: 4,
-    elevation: 2,
-    padding: 20,
-    gap: 20
-  },
-  personInfoContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    
-  },
-  personName: {
-    fontFamily: FONTS.cabin,
-    fontSize: 24,
-    fontWeight: 600,
-    color: COLORS.black,
-  },
-  personEmail: {
-    fontFamily: FONTS.cabin,
-    fontSize: 13,
-    fontWeight: 700,
-    color: COLORS.lightGray,
-  },
-  contentContainer: {
-    position: 'relative',
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    gap: 10
-  },
-  settingsText: {
-    fontFamily: FONTS.cabin,
-    fontSize: 15,
-    fontWeight: 700,
-    color: COLORS.black,
-    width: '75%'
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',  
-  },
-  iconContainer: {
-    width: 30,
-    height: 30,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  headerStyle: {
-    fontFamily: FONTS.cabinBold,
-    fontSize: 24,
-    lineHeight: 32,
-  }
-})

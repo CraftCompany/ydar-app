@@ -3,9 +3,10 @@ export const COLORS = {
     black: '#071108',
     red: '#f64740',
     gray: '#6f686d',
-    lightGray: '#bcb7b7',
+    lightGray: 'rgba(111, 104, 109, 0.50);',
     homeWhite: "#FFF8EE",
-    lightRed: '#EEE2D2'
+    lightRedGray: 'rgba(188, 183, 183, 0.15)',
+    lightBlack: '#1D1D1D',
 }
 
 export const FONTS = {

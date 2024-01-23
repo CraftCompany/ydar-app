@@ -72,7 +72,8 @@
       "feedback": "Зворотній зв'язок",
       "logout": "Вийти",
       "en": "English",
-      "ukr": "Українська"
+      "ukr": "Українська",
+      "currentLanguage": "Українська"
     },
     "eventScreen": {
       "headText": "Івенти"

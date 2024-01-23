@@ -12,9 +12,8 @@ import { Center } from 'native-base';
 import { LangContext } from '../App';
 import { useTranslation } from 'react-i18next';
 import { FeedNavigationContainer } from './MainAppScreens/Feed';
-
-import {Events} from './MainAppScreens/Events'
 import { SettingsNavigationContainer } from './MainAppScreens/Settings';
+import { useTheme } from '../app/context/ThemeContext'
 
 const styles = StyleSheet.create({
     tabBarContainer: {
@@ -44,11 +43,6 @@ const styles = StyleSheet.create({
         marginTop: 5,
         transform: [{ scale: 1.2 }],
     },
-    tabHeaderStyle: {
-        fontFamily: FONTS.cabinBold,
-        fontSize: 24,
-        lineHeight: 32,
-    }
 })
 
 
@@ -66,7 +60,16 @@ const Tab = createBottomTabNavigator();
 export const MainApp = () => {
 
     const { t } = useTranslation('tabHeaders')
+    const { theme } = useTheme()
 
+    const styles = StyleSheet.create({
+        tabHeaderStyle: {
+            fontFamily: FONTS.cabinBold,
+            fontSize: 24,
+            lineHeight: 32,
+            color: theme.textColor1
+        }
+    })
     return (
         <Tab.Navigator initialRouteName="Feed" backBehavior={"history"}
             screenOptions={{
