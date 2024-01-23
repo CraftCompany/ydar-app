@@ -79,7 +79,8 @@
     "privacyPolicy": "Privacy Policy",
     "FAQ": "FAQ",
     "feedback": "Feedback",
-    "logout": "Logout"
+    "logout": "Logout",
+    "currentLanguage": "English"
   },
   "supportedLanguages": {
     "en": "English",

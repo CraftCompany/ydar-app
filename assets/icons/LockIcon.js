@@ -6,9 +6,9 @@ const LockIcon = (props) => (
     width={24}
     height={24}
     fill="none"
-    {...props}
   >
     <Path
+      {...props}
       stroke="#666"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -16,6 +16,7 @@ const LockIcon = (props) => (
       d="M16.423 9.448V7.3a4.552 4.552 0 0 0-4.551-4.551 4.55 4.55 0 0 0-4.57 4.53v2.168"
     />
     <Path
+      {...props}
       stroke="#666"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -24,6 +25,7 @@ const LockIcon = (props) => (
       clipRule="evenodd"
     />
     <Path
+      {...props}
       stroke="#666"
       strokeLinecap="round"
       strokeLinejoin="round"
