@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Pressable, Image } from 'native-base';
+import { Text, View, Pressable, Image, Center, Box } from 'native-base';
 import LangSwitcher from '../../app/utils/LangSwitcher'
 import { StyleSheet } from 'react-native'
 import { COLORS, FONTS } from '../../constants/constants'
@@ -12,15 +12,14 @@ import QuestionMarkIcon from '../../assets/icons/QuestionMarkIcon';
 import LetterIcon from '../../assets/icons/LetterIcon';
 import LogOutIcon from '../../assets/icons/LogOutIcon';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import SettingsPlaceholderImage from '../../assets/mockImages/SettingsPlaceholder'
 
 const SettingsNavigator = createNativeStackNavigator()
 
 export const SettingsNavigationContainer = () => {
 
   const { t } = useTranslation('settingsScreen')
-  const { t:headerTitle } = useTranslation('tabHeaders')
+  const { t: headerTitle } = useTranslation('tabHeaders')
 
   return (
     <SettingsNavigator.Navigator
@@ -49,7 +48,7 @@ export const SettingsNavigationContainer = () => {
   );
 }
 
-export const Settings = ({navigation}) => {
+export const Settings = ({ navigation }) => {
 
   const { t } = useTranslation('settingsScreen')
 
@@ -67,7 +66,7 @@ export const Settings = ({navigation}) => {
     {
       icon: <LockIcon />,
       text: t("aboutDeveloper"),
-      navigate: 'LangSwitcher'    
+      navigate: 'LangSwitcher'
     },
     {
       icon: <LockIcon />,
@@ -77,12 +76,12 @@ export const Settings = ({navigation}) => {
     {
       icon: <QuestionMarkIcon />,
       text: t("FAQ"),
-      navigate: 'LangSwitcher'    
+      navigate: 'LangSwitcher'
     },
     {
       icon: <LetterIcon />,
       text: t("feedback"),
-      navigate: 'LangSwitcher'    
+      navigate: 'LangSwitcher'
     },
     {
       icon: <LogOutIcon />,
@@ -92,12 +91,13 @@ export const Settings = ({navigation}) => {
   ]
 
   return (
-    <View style={styles.settingsContainerStyle}>
-      <View style={styles.avatarContainer}>
-        <Image source={require('../../assets/basicAvatar.png')} style={styles.image}/>
-      </View>
-
-      <View style={styles.settingsContainer}>
+    <Box style={styles.settingsContainerStyle} flex={1}>
+      <Center>
+        <View style={styles.avatarContainer} justifyContent={'center'} alignContent={'center'}>
+          <Center><SettingsPlaceholderImage style={styles.image} /></Center>
+        </View>
+      </Center>
+      <Box style={styles.settingsContainer}>
         <View style={styles.personInfoContainer}>
           <Text style={styles.personName}>
             Name
@@ -108,8 +108,8 @@ export const Settings = ({navigation}) => {
         </View>
 
         {
-          settingsList.map((item)=>{
-            return(
+          settingsList.map((item) => {
+            return (
               <View style={styles.contentContainer} key={`settings-line-container-${item.text}`}>
                 <View style={styles.iconContainer}>
                   {item.icon}
@@ -117,43 +117,41 @@ export const Settings = ({navigation}) => {
                 <Text style={styles.settingsText}>
                   {item.text}
                 </Text>
-                <Pressable onPress={()=>{navigation.navigate(item.navigate)}}>
+                <Pressable onPress={() => { navigation.navigate(item.navigate) }} style={styles.settingsPressable}>
                   <ArrowSettingsScreen />
                 </Pressable>
               </View>
             )
           })
         }
-      </View>
-    </View>
+      </Box>
+    </Box>
   )
 }
 
 const styles = StyleSheet.create({
   settingsContainerStyle: {
     flexDirection: 'column',
-    alignItems: 'center',
     backgroundColor: COLORS.white,
     paddingHorizontal: 20,
     paddingTop: 50,
-    height: '100%',
-    position: 'relative'
   },
   avatarContainer: {
-    width: '17vh',
-    height: '17vh',
+    width: 100,
+    height: 100,
     borderRadius: '50%',
     borderColor: COLORS.black,
-    borderWidth: 3,
-    top: '4%',
-    zIndex: 5
+    borderWidth: 1,
+    marginTop: 50,
+    top: '20%',
+    zIndex: 5,
   },
   settingsContainer: {
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'center',
     width: '100%',
-    height: '60%',
+    height: '58%',
     backgroundColor: 'rgba(188, 183, 183, 0.15)',
     borderRadius: 16,
     shadowColor: 'rgba(0, 0, 0, 0.10)',
@@ -162,13 +160,12 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 2,
     padding: 20,
-    gap: 20
+    gap: 20,
   },
   personInfoContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    
   },
   personName: {
     fontFamily: FONTS.cabin,
@@ -197,9 +194,8 @@ const styles = StyleSheet.create({
     width: '75%'
   },
   image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',  
+    transform: [{ scale: 0.9 }],
+    borderRadius: '50%',
   },
   iconContainer: {
     width: 30,
@@ -212,5 +208,8 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.cabinBold,
     fontSize: 24,
     lineHeight: 32,
+  },
+  settingsPressable: {
+    width: 30
   }
 })

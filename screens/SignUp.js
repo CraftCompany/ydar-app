@@ -13,7 +13,6 @@ import RightLine from '../assets/icons/RightLine'
 import LeftLine from '../assets/icons/LeftLine'
 import LockIcon from '../assets/icons/LockIcon'
 import { SuccessSplash } from '../splashes/successSplash'
-import { LangContext } from '../App'
 import { useTranslation } from 'react-i18next'
 
 

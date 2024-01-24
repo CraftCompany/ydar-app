@@ -17,8 +17,6 @@ import 'react-native-gesture-handler';
 
 const Stack = createNativeStackNavigator();
 
-export const LangContext = React.createContext();
-
 const Index = () => {
 
   let [fontsLoaded, setFontsLoaded] = React.useState(false)

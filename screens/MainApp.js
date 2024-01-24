@@ -2,14 +2,13 @@ import React, { useContext } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Tasks, Ticket, Profile, Settings } from './MainAppScreens';
 import { COLORS, FONTS } from '../constants/constants';
-import { Pressable, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { Pressable, StyleSheet, View, useWindowDimensions } from 'react-native';
 import HomeTabIcon from '../assets/icons/HomeTabIcon';
 import TaskTabIcon from '../assets/icons/TaskTabIcon';
 import TicketTabIcon from '../assets/icons/TicketTabIcon';
 import ProfileTabIcon from '../assets/icons/ProfileTabIcon';
 import SettingsTabIcon from '../assets/icons/SettingsTabIcon';
 import { Center } from 'native-base';
-import { LangContext } from '../App';
 import { useTranslation } from 'react-i18next';
 import { FeedNavigationContainer } from './MainAppScreens/Feed';
 
