@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Pressable, Image } from 'native-base'
+import { Text, View, Pressable, Center } from 'native-base'
 import LangSwitcher from '../../app/utils/LangSwitcher'
 import { StyleSheet } from 'react-native'
 import { COLORS, FONTS } from '../../constants/constants'
@@ -13,6 +13,7 @@ import LetterIcon from '../../assets/icons/LetterIcon'
 import LogOutIcon from '../../assets/icons/LogOutIcon'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useTheme } from '../../app/context/ThemeContext'
+import SettingsPlaceholderImage from '../../assets/mockImages/SettingsPlacaholderImage'
 
 
 const SettingsNavigator = createNativeStackNavigator()
@@ -68,20 +69,18 @@ export const Settings = ({navigation}) => {
   const styles = StyleSheet.create({
     settingsContainerStyle: {
       flexDirection: 'column',
-      alignItems: 'center',
       backgroundColor: theme.bodyBackground,
       paddingHorizontal: 20,
       paddingTop: 50,
-      height: '100%',
-      position: 'relative',
     },
     avatarContainer: {
-      width: '17vh',
-      height: '17vh',
+      width: 100,
+      height: 100,
       borderRadius: '50%',
       borderColor: theme.borderColor,
-      borderWidth: 3,
-      top: '4%',
+      borderWidth: 1,
+      marginTop: 50,
+      top: '20%',
       zIndex: 5,
     },
     settingsContainer: {
@@ -89,7 +88,7 @@ export const Settings = ({navigation}) => {
       justifyContent: 'flex-end',
       alignItems: 'center',
       width: '100%',
-      height: '60%',
+      height: '58%',
       backgroundColor: theme.containerBackground,
       borderRadius: 16,
       shadowColor: 'rgba(0, 0, 0, 0.10)',
@@ -98,13 +97,12 @@ export const Settings = ({navigation}) => {
       shadowRadius: 4,
       elevation: 2,
       padding: 20,
-      gap: 20
+      gap: 20,
     },
     personInfoContainer: {
       flexDirection: 'column',
       justifyContent: 'space-between',
       alignItems: 'center',
-      
     },
     personName: {
       fontFamily: FONTS.cabin,
@@ -123,34 +121,36 @@ export const Settings = ({navigation}) => {
       flexDirection: 'row',
       alignItems: 'center',
       width: '100%',
-      gap: '5%'
+      gap: 10
     },
     settingsText: {
       fontFamily: FONTS.cabin,
       fontSize: 15,
       fontWeight: 700,
       color: theme.textColor1,
-      width: '75%',
+      width: '75%'
     },
     image: {
-      width: '100%',
-      height: '100%',
-      resizeMode: 'cover',  
+      transform: [{ scale: 0.9 }],
+      borderRadius: '50%',
     },
     iconContainer: {
       width: 30,
       height: 30,
       flexDirection: 'row',
       justifyContent: 'flex-start',
-      alignItems: 'center',
+      alignItems: 'center'
     },
+    settingsPressable: {
+      width: 30
+    }
   })
   
   const settingsList = [
     {
       icon: <Bluebell fill={theme.textColor1}/>,
       text: t("notifications"),
-      onPress: console.log('+')
+      onPress: null
     },
     {
       icon: <TranslateLanguageIcon fill={theme.textColor1}/>,
@@ -165,30 +165,32 @@ export const Settings = ({navigation}) => {
     {
       icon: <LockIcon fill={isDarkTheme ? theme.textColor1 : null}/>,
       text: t("privacyPolicy"),
-      onPress: console.log('+')
+      onPress: null
     },
     {
       icon: <QuestionMarkIcon fill={theme.textColor1}/>,
       text: t("FAQ"),
-      onPress: console.log('+')
+      onPress: null
     },
     {
       icon: <LetterIcon fill={theme.textColor1}/>,
       text: t("feedback"),
-      onPress: console.log('+')   
+      onPress: null   
     },
     {
       icon: <LogOutIcon fill={theme.textColor1}/>,
       text: t("logout"),
-      onPress: console.log('+')
+      onPress: null
     },
   ]
 
   return (
     <View style={styles.settingsContainerStyle}>
-      <View style={styles.avatarContainer}>
-        <Image source={require('../../assets/basicAvatar.png')} style={styles.image}/>
-      </View>
+      <Center>
+        <View style={styles.avatarContainer} justifyContent={'center'} alignContent={'center'}>
+          <Center><SettingsPlaceholderImage style={styles.image} /></Center>
+        </View>
+      </Center>
 
       <View style={styles.settingsContainer}>
         <View style={styles.personInfoContainer}>
@@ -221,7 +223,7 @@ export const Settings = ({navigation}) => {
                     {item.text}
                   </Text>
                 }
-                <Pressable onPress={item.onPress}>
+                <Pressable onPress={item.onPress} style={styles.settingsPressable}>
                   <ArrowSettingsScreen fill={theme.textColor1}/>
                 </Pressable>
               </View>
